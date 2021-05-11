@@ -2,31 +2,25 @@ package com.viniciuscarneiro.plataformapedidos.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Category implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Armazena o ID da categoria
-	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	/**
-	 * Armazena o nome da categoria
-	 */
 	private String name;
-	
-	/**
-	 * Construtor vazio
-	 */
+
 	public Category() {
 		
 	}
 
-	/**
-	 * Construtor padrão
-	 * @param id id categoria
-	 * @param name nome da categoria
-	 */
 	public Category(Integer id, String name) {
 		super();
 		this.id = id;
@@ -79,4 +73,5 @@ public class Category implements Serializable{
 		return name;
 	}
 }
+
 
