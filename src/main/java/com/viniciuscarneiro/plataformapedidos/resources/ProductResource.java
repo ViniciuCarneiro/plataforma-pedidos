@@ -9,33 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.viniciuscarneiro.plataformapedidos.domain.Category;
-import com.viniciuscarneiro.plataformapedidos.services.CategoryService;
+import com.viniciuscarneiro.plataformapedidos.domain.Product;
+import com.viniciuscarneiro.plataformapedidos.services.ProductService;
 
 @RestController
-@RequestMapping(value="/categories")
-public class CategoryResource {
+@RequestMapping(value="/products")
+public class ProductResource {
 
 	@Autowired
-	private CategoryService service;
+	private ProductService service;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		
-		Category category = service.searchCategory(id);
+		Product product = service.searchProduct(id);
 		
-		return ResponseEntity.ok(category);
+		return ResponseEntity.ok(product);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> findById() {
 		
-		List<Category> categories = service.searchCategory();
+		List<Product> products = service.searchProduct();
 		
-		return ResponseEntity.ok(categories);
+		return ResponseEntity.ok(products);
 	}
-	
-	
-	
 }
-

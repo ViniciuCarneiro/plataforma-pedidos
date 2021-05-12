@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.viniciuscarneiro.plataformapedidos.domain.Category;
 import com.viniciuscarneiro.plataformapedidos.repositories.CategoryRepository;
+import com.viniciuscarneiro.plataformapedidos.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoryService {
@@ -19,7 +20,8 @@ public class CategoryService {
 		
 		Optional<Category> category = categoryRepository.findById(id);
 		
-		return category.orElse(null);
+		return category.orElseThrow(() -> new ObjectNotFoundException( 
+				 "Invalid or nonexistent id " + id + " parameter")); 
 	}	
 	
 	public List<Category> searchCategory() {
