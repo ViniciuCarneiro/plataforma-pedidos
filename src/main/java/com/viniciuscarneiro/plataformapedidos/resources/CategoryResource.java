@@ -28,14 +28,11 @@ public class CategoryResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> findById() {
+	public ResponseEntity<?> find() {
 		
 		List<Category> categories = service.searchCategory();
 		
 		return ResponseEntity.ok(categories);
 	}
-	
-	
-	
 }
 
