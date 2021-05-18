@@ -1,16 +1,17 @@
 package com.viniciuscarneiro.plataformapedidos.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class City implements Serializable{
+public class State implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,21 +20,17 @@ public class City implements Serializable{
 	
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name="state_id")
-	private State state;
+	@OneToMany(mappedBy = "state")
+	private List<City> cities = new ArrayList<>();
 	
-	private String responseMessage;
-	
-	public City() {
+	public State() {
 		
 	}
-	
-	public City(Integer id, String name, State state) {
+
+	public State(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.state = state;
 	}
 
 	public Integer getId() {
@@ -51,23 +48,14 @@ public class City implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	public State getState() {
-		return state;
-	}
 
-	public void setState(State state) {
-		this.state = state;
-	}
+	public List<City> getCities() {
+	return cities;
+}
 
-	public String getResponseMessage() {
-		return responseMessage;
-	}
-
-	public void setResponseMessage(String responseMessage) {
-		this.responseMessage = responseMessage;
-	}
+public void setCities(List<City> cities) {
+	this.cities = cities;
+}
 
 	@Override
 	public int hashCode() {
@@ -85,7 +73,7 @@ public class City implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		City other = (City) obj;
+		State other = (State) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -98,4 +86,5 @@ public class City implements Serializable{
 	public String toString() {
 		return name;
 	}
+	
 }

@@ -8,9 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.viniciuscarneiro.plataformapedidos.domain.Category;
+import com.viniciuscarneiro.plataformapedidos.domain.City;
 import com.viniciuscarneiro.plataformapedidos.domain.Product;
+import com.viniciuscarneiro.plataformapedidos.domain.State;
 import com.viniciuscarneiro.plataformapedidos.repositories.CategoryRepository;
+import com.viniciuscarneiro.plataformapedidos.repositories.CityRepository;
 import com.viniciuscarneiro.plataformapedidos.repositories.ProductRepository;
+import com.viniciuscarneiro.plataformapedidos.repositories.StateRepository;
 
 @SpringBootApplication
 public class PlataformapedidosApplication implements CommandLineRunner{
@@ -20,6 +24,12 @@ public class PlataformapedidosApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private CityRepository cityRepository;
+	
+	@Autowired
+	private StateRepository stateRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PlataformapedidosApplication.class, args);
@@ -42,8 +52,18 @@ public class PlataformapedidosApplication implements CommandLineRunner{
 		prod2.getCategories().addAll(Arrays.asList(cat1,cat2));
 		prod3.getCategories().add(cat1);
 		
+		State state1 = new State(null, "Goias");
+		State state2 = new State(null, "Sao Paulo");
+		
+		City city1 = new City(null, "Campos Belos", state1);
+		City city2 = new City(null, "São Paulo", state2);
+		
+		state1.getCities().addAll(Arrays.asList(city1));
+		state2.getCities().addAll(Arrays.asList(city2));
 		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+		stateRepository.saveAll(Arrays.asList(state1, state2));
+		cityRepository.saveAll(Arrays.asList(city1, city2));
 	}
 }

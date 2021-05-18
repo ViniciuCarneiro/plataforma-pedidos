@@ -11,38 +11,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.viniciuscarneiro.plataformapedidos.domain.City;
-import com.viniciuscarneiro.plataformapedidos.services.CityService;
+import com.viniciuscarneiro.plataformapedidos.domain.State;
+import com.viniciuscarneiro.plataformapedidos.services.StateService;
+
 
 @RestController
-@RequestMapping(value = "/cities")
-public class CityResource {
+@RequestMapping(value = "/states")
+public class StateResource {
 
 	@Autowired
-	private CityService service;
+	private StateService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 
-		City city = service.searchCity(id);
+		State state = service.searchState(id);
 
-		return ResponseEntity.ok(city);
+		return ResponseEntity.ok(state);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> find() {
 
-		List<City> cities = service.searchCity();
+		List<State> states = service.searchState();
 
-		return ResponseEntity.ok(cities);
+		return ResponseEntity.ok(states);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody City city) {
+	public ResponseEntity<?> create(@RequestBody State state) {
 
-		City newCity = service.registerCity(city);
-		newCity.setResponseMessage("Cidade cadastrada com sucesso!");
+		State newState = service.registerState(state);
 
-		return ResponseEntity.ok().body(newCity);
+		return ResponseEntity.ok().body(newState);
 	}
 }
+
